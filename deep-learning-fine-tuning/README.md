@@ -102,3 +102,7 @@ This repository is the methodological foundation for the rest of the portfolio: 
 - Extend the train/val/test correction methodology demonstrated in the native-PyTorch BERT notebook as a template checklist applied across the rest of the portfolio.
 - Scale QLoRA fine-tuning to a larger base model to test whether the same conclusions hold.
 - Apply the custom residual CNN as an additional "custom backbone" entry in the `efficient-ai-model-deployment` backbone-comparison study (it is already referenced there conceptually).
+
+## Research Takeaway
+
+The native-PyTorch BERT/MRPC notebook is this repository's clearest methodological result: correcting the train/validation/test split changed the reported held-out metrics (accuracy 0.826, F1 0.880) from what a naive validation-only protocol would have shown, demonstrating why the split-correction discipline matters beyond BERT specifically. Elsewhere, both LoRA adapters and both custom residual CNNs trained, evaluated, and reproduced successfully — the from-scratch CNNs in particular reach solid accuracy (94% on FashionMNIST, 84% on 5-class Flowers) without any pretrained weights, confirming the residual architecture is implemented and training correctly.
