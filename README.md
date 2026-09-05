@@ -30,6 +30,52 @@ The unifying thread is **perception for embodied and resource-constrained system
 
 Robotics/Physical AI is the intended integration point for this work (depth → 3D perception, open-vocabulary grounding → robot perception, quantization → edge deployment) and will be added once the underlying robotics source code is organized into its own repository.
 
+## Selected Quantitative Results
+
+A quick-glance summary of headline numbers — see each repository's README for full results, methodology, and caveats.
+
+**Depth estimation** (59 RealSense RGB-depth pairs)
+
+| Model | MAE | AbsRel | Mean Latency |
+|---|---:|---:|---:|
+| Depth Pro | 0.2931 m | 13.96% | ~5705 ms/image |
+| Depth Anything V2 | 0.3508 m | 15.19% | ~72.4 ms/image |
+| ZoeDepth-NYU | 0.3605 m | 17.25% | ~364.1 ms/image |
+
+Depth Pro is the most accurate; Depth Anything V2 is by far the fastest, making it the strongest accuracy/latency balance overall.
+
+**Open-vocabulary detection** (12-image controlled COCO benchmark)
+
+- YOLOE: precision 1.00, F1 0.750, mean IoU 0.9206, 35.4M parameters.
+- OWLv2: recall 0.733, F1 0.846 (best of the three), mean latency 740.9 ms/image.
+- GroundingDINO: F1 0.741, 172.3M parameters — Official vs. Hugging Face implementations match to 2–4 decimal places.
+
+**Video & multimodal perception** (single reference video, native-mode comparison)
+
+| System | Processing Time | Output |
+|---|---:|---|
+| YOLOE + ByteTrack | 24.5 s | 38 detections, 3 track IDs |
+| OWLv2 + ByteTrack | 61.5 s | 19 detections |
+| LLaVA-NeXT-Video | 35.6 s | 9 anomaly labels, 100% coverage |
+| Qwen3-VL (chunk-based) | ~3051.7 s | 15/18 chunks flagged anomalous |
+
+TimeSformer (UCF101 subset): Top-1 accuracy 56.67%, Top-5 66.67%, temporal consistency 84.17%.
+
+**Efficient deployment** (DETR, standard vs. 4-bit NF4)
+
+| Model | mAP | AP50 | Mean Inference | Peak GPU Memory |
+|---|---:|---:|---:|---:|
+| Standard DETR | 53.68% | 73.77% | 0.1265 s | 0.532 GB |
+| 4-Bit NF4 DETR | 20.52% | 40.86% | 0.0870 s | 0.374 GB |
+
+4-bit quantization cuts memory ~30% and roughly doubles throughput, at a substantial accuracy cost.
+
+**Fine-tuning**
+
+- BERT/MRPC (native PyTorch, held-out test set): Accuracy 0.826, F1 0.8799.
+- Multi-adapter LoRA: Adapter 1 (589,824 params) reaches perplexity 26.66 vs. Adapter 2's (202,752 params) 28.03.
+- Custom residual CNN (Flowers, 5-class, from scratch): Test Accuracy 83.85%, Macro F1 0.8388.
+
 ## Repositories
 
 | Repository | Research Focus |
