@@ -92,3 +92,7 @@ This work treats VLMs as general-purpose perception front-ends and is aimed at u
 - Add independently annotated images to convert the Qwen notebooks' proxy metrics into verified detection/action accuracy.
 - Extend BLIP-2 evaluation to a larger, standard VQA benchmark for external comparability.
 - Compare Qwen3-VL and Qwen2.5-VL directly on an identical image/prompt set rather than parallel but separate benchmarks.
+
+## Research Takeaway
+
+These experiments show that zero-shot VLMs can be operationally reliable — perfectly repeatable across queries, with full action-coverage on Qwen3-VL-2B and a working grounded-detection pipeline on Qwen2.5-VL-3B — while VQA accuracy on BLIP-2 remains modest on out-of-distribution questions even with zero hallucination. The evaluation methodology deliberately keeps structured-output validity, semantic correctness, and operational metrics (latency, repeatability, VRAM) as separate axes, since a model can score well on one without scoring well on another.
