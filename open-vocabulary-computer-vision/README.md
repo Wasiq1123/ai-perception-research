@@ -111,3 +111,7 @@ This work is aimed at determining which open-vocabulary detectors are trustworth
 - Extend the controlled YOLOE/OWLv2/GroundingDINO benchmark to the full COCO validation set.
 - Add ByteTrack-based multi-frame tracking evaluation as a separate, explicit experiment.
 - Apply the same official-vs-Hugging-Face consistency protocol to OWLv2 and YOLOE.
+
+## Research Takeaway
+
+Official-repository and Hugging Face implementations proved practically equivalent for both GroundingDINO (precision/recall/F1 matching to 2–4 decimal places across five thresholds) and SAM2 (all metrics within 0.001 of each other) — the choice of inference stack is not a meaningful accuracy risk for these two models. Across the three-model controlled benchmark, no single detector dominated: YOLOE gave the tightest localization at the smallest parameter count, OWLv2 gave the best overall F1, and GroundingDINO — the largest model — had the lowest precision of the three, underscoring that parameter count alone does not predict zero-shot detection quality.
