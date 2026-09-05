@@ -133,3 +133,7 @@ This work sits at the intersection of 3D perception and edge deployment: verifyi
 - Extend evaluation to a public benchmark (NYUv2/KITTI) for external comparability.
 - Broaden the RealSense set across more rooms/lighting conditions.
 - Quantize and benchmark ZoeDepth and Depth Pro through the same ONNX/OpenVINO pipeline currently applied only to Depth Anything V2.
+
+## Research Takeaway
+
+Across all six experiments, accuracy and deployment cost move independently rather than together: Depth Pro is the most accurate model tested but also the slowest by roughly two orders of magnitude, while Depth Anything V2 offers the strongest accuracy/latency balance and remains usable after ONNX/OpenVINO INT8 quantization at a measurable but modest accuracy cost. Implementation choice matters too — Hugging Face's Depth Anything V2 path was both more accurate and faster than the official repository path under the same protocol. This repository treats metric accuracy and deployment efficiency as separate, jointly-tracked dimensions rather than assuming one predicts the other.
