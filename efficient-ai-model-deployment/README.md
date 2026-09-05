@@ -69,3 +69,7 @@ This repository's goal is to characterize the accuracy/cost trade-off of model c
 - Benchmark on actual edge hardware (e.g. OpenVINO on an Intel NUC, or a Jetson device) rather than Colab GPU/CPU.
 - Apply the same INT8 ONNX pipeline used for Depth Anything V2 to the open-vocabulary detectors.
 - Extend 4-bit quantization evaluation beyond DETR to other detection/VLM models in this portfolio.
+
+## Research Takeaway
+
+For DETR, 4-bit NF4 quantization delivers a real efficiency gain — roughly 30% less peak GPU memory and a jump in throughput from 7.90 to 11.49 images/sec — but at a substantial cost to detection quality (mAP dropping by nearly a third). This repository's controlled, single-variable design makes that trade-off explicit rather than reporting efficiency gains in isolation: any deployment decision here needs both numbers side by side, not just the faster one.
