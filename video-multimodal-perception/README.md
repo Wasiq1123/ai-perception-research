@@ -95,3 +95,7 @@ This repository extends the portfolio's static-perception work into the temporal
 - Evaluate the anomaly-detection comparison across multiple videos/scenarios rather than one reference clip.
 - Fine-tune TimeSformer or a comparable model directly on UCF101 to separate "zero-shot cross-dataset transfer" from "fine-tuned" performance.
 - Combine Whisper transcription with the VLM/anomaly pipeline for multimodal (audio+video) event detection.
+
+## Research Takeaway
+
+The three experiments span three distinct temporal-perception paradigms with very different cost profiles: frame-level detection+tracking (YOLOE/OWLv2) runs in under a minute, chunk-based VLM anomaly reasoning (Qwen3-VL) takes nearly an hour on the same reference video, and Whisper transcribes speech roughly 10× faster than real time. No single evaluation framework fits all three — the repository's approach of reporting each system's native operational metrics, rather than forcing a shared accuracy score, reflects that these are fundamentally different tools for different parts of a temporal perception pipeline.
